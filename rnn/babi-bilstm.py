@@ -43,7 +43,7 @@ prof_start = batch_num+1
 prof_end = 2*batch_num+1
 
 prof_len = 1
-prof_range = '{}, {}'.format(prof_start, prof_start + prof_len)
+prof_range = '{}, {}'.format(prof_start, prof_end)
 prof_or_latency = args.prof_or_latency
 optimizer = args.optimizer
 
@@ -150,7 +150,7 @@ logs = "../logs/" + "epoch-{}-{}-{}-{}".format(job_name, optimizer, batch_size, 
 # logs = "/home/ubuntu/Deep-Cloud/logs/"  + str(batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S")
 tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
                                                  histogram_freq = 1,
-                                                 profile_batch = (prof_start,prof_end))
+                                                 profile_batch = prof_range)
 
 # Setting for latency check callback
 class BatchTimeCallback(tf.keras.callbacks.Callback):
