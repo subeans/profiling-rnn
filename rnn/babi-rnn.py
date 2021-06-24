@@ -41,10 +41,12 @@ num_data = 10000
 batch_size = args.batch_size
 prof_point = args.prof_point
 batch_num = math.ceil(num_data/batch_size)
-epochs = math.ceil(prof_point)
-prof_start = math.floor(batch_num * prof_point)
-prof_len = 1
-prof_range = '{}, {}'.format(prof_start, prof_start + prof_len)
+epochs = 3
+# prof_start = math.floor(batch_num * prof_point)
+# prof_len = 1
+prof_start = batch_num +1
+prof_end = 2*batch_num + 1
+prof_range = '{}, {}'.format(prof_start, prof_end)
 prof_or_latency = args.prof_or_latency
 optimizer = args.optimizer
 
@@ -147,7 +149,7 @@ model.compile(optimizer=optimizer,
 
 # Setting for tensorboard profiling callback
 job_name = "babi-rnn"
-logs = "./logs/" + "{}-{}-{}-{}".format(job_name, optimizer, batch_size, datetime.now().strftime("%Y%m%d-%H%M%S"))
+logs = "./logs/" + "epoch-{}-{}-{}-{}".format(job_name, optimizer, batch_size, datetime.now().strftime("%Y%m%d-%H%M%S"))
 # logs = "/home/ubuntu/Deep-Cloud/logs/"  + str(batch_size) + "-" + datetime.now().strftime("%Y%m%d-%H%M%S")
 tboard_callback = tf.keras.callbacks.TensorBoard(log_dir = logs,
                                                  histogram_freq = 1,
