@@ -188,7 +188,7 @@ steps_per_epoch = tf.data.experimental.cardinality(train_ds).numpy()
 num_train_steps = steps_per_epoch * epochs
 num_warmup_steps = int(0.1*num_train_steps)
 
-init_lr = 3e-5a
+init_lr = 3e-5
 optimizer_type='adamw'
 optimizer = optimization.create_optimizer(init_lr=init_lr,
                                           num_train_steps=num_train_steps,
